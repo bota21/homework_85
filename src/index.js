@@ -13,6 +13,7 @@ import {
   connectRouter,
 } from "connected-react-router";
 import { createBrowserHistory } from "history";
+import albumReducer from "./store/reducers/albumReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -20,6 +21,7 @@ const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   artists: artistReducer,
+  albums: albumReducer,
   router: connectRouter(history),
 });
 

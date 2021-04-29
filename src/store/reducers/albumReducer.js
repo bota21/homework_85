@@ -1,11 +1,11 @@
 import {
-  FETCH_ARTIST_SUCCESS,
+  FETCH_ALBUM_SUCCESS,
   FETCH_REQUEST,
-  FETCH_ARTIST_ERROR,
+  FETCH_ALBUM_ERROR,
 } from "../actionTypes";
 
 const initialState = {
-  artists: [],
+  albums: [],
   loading: false,
   error: null,
 };
@@ -14,13 +14,12 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_REQUEST:
       return { ...state, loading: true };
-    case FETCH_ARTIST_SUCCESS:
-      return { ...state, loading: false, artists: action.artists };
-    case FETCH_ARTIST_ERROR:
-      return { ...state, loading: false, error: action.error };
+    case FETCH_ALBUM_SUCCESS:
+      return { ...state, albums: action.albums, loading: false };
+    case FETCH_ALBUM_ERROR:
+      return { ...state, error: action.error, loading: false };
     default:
       return state;
   }
 };
-
 export default reducer;

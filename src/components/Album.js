@@ -14,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
-  artistLink: {
-    textDecoration: "none",
-  },
   cardMedia: {
     paddingTop: "56.25%", // 16:9
+  },
+  albumLink: {
+    textDecoration: "none",
   },
   card: {
     cursor: "pointer",
@@ -27,12 +27,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   cardText: {
+    textDecoration: "none",
     color: "#000",
     fontSize: 26,
   },
 }));
 
-export default function Artist({ artists }) {
+export default function Album({ albums }) {
   const classes = useStyles();
   const cardImage = imageURL.apiURL;
 
@@ -40,21 +41,20 @@ export default function Artist({ artists }) {
     <>
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {artists.map((artist) => (
-            <Grid item key={artist._id} xs={12} sm={6} md={4}>
-              <Link
-                href={"/artist/" + artist._id}
-                className={classes.artistLink}>
+          {albums.map((album) => (
+            <Grid item key={album._id} xs={12} sm={6} md={4}>
+              <Link href={"/album/" + album._id} className={classes.albumLink}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image={cardImage + artist.image}
-                    title={artist.title}
+                    image={cardImage + album.cover}
+                    title={album.title}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography className={classes.cardText}>
-                      {artist.title}
+                      {album.title}
                     </Typography>
+                    <Typography variant="h6">{album.year}</Typography>
                   </CardContent>
                 </Card>
               </Link>
