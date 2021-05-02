@@ -7,6 +7,7 @@ import { Paper } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    cursor: 'pointer'
   },
   paper: {
     display: "flex",
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Track({ tracks }) {
+export default function Track({ tracks, onClick }) {
   const classes = useStyles();
 
   return (
@@ -33,7 +34,7 @@ export default function Track({ tracks }) {
       <div className={classes.root}>
         <Grid container spacing={3}>
           {tracks.map((track) => (
-            <Grid item xs={12} key={track._id}>
+            <Grid item xs={12} key={track._id} onClick={() => onClick(track._id)}>
               <Paper className={classes.paper}>
                 <Typography className={classes.cardText}>
                   {track.num}

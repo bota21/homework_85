@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { requestTracks } from "../store/actions/trackAction";
+import { addTrackHistory, requestTracks } from "../store/actions/trackAction";
 import Track from "../components/Track";
 import { Button } from "@material-ui/core";
 
@@ -24,13 +24,16 @@ export default function Tracks(props) {
   const dispatch = useDispatch();
   const tracks = useSelector((state) => state.tracks.tracks);
   const id = props.match.params.albumId;
-
+  
   useEffect(() => {
     dispatch(requestTracks(id));
   }, [dispatch, id]);
 
   const goBack = () => {
     props.history.goBack();
+  };
+  const postTrackHistory = (id) => {
+    dispatch(addTrackHistory({track: id}))
   };
 
   return (
@@ -56,7 +59,7 @@ export default function Tracks(props) {
       </div>
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          <Track tracks={tracks} />
+          <Track tracks={tracks} onClick={postTrackHistory}/>
         </Grid>
       </Container>
       <Container className={classes.cardGrid} maxWidth="md">

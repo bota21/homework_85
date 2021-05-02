@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 const Layout = (props) => {
   const classes = useStyles();
   const user = useSelector(state => state.user.user);
-  // console.log(user);
 
   return (
     <>

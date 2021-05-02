@@ -7,6 +7,7 @@ import Tracks from "./Tracks";
 import Register from "../components/Form/Register";
 import Login from "../components/Form/Login";
 import Main from "../components/Main";
+import TrackHistories from "./TrackHistories";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route exact path="/album/:albumId" component={Tracks} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/track_history" component={TrackHistories} />
         </Switch>
       </Layout>
     </div>

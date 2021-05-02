@@ -38,7 +38,6 @@ export const loginUsers = (users) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("/users/sessions", users);
-      console.log(response);
       dispatch(loginUserSuccess(response.data));
       dispatch(push("/artists"));
     } catch (e) {

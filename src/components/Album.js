@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import imageURL from "../axios/imageUrl";
-import { Link } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -43,7 +43,7 @@ export default function Album({ albums }) {
         <Grid container spacing={4}>
           {albums.map((album) => (
             <Grid item key={album._id} xs={12} sm={6} md={4}>
-              <Link href={"/album/" + album._id} className={classes.albumLink}>
+              <NavLink to={"/album/" + album._id} className={classes.albumLink}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -57,7 +57,7 @@ export default function Album({ albums }) {
                     <Typography variant="h6">{album.year}</Typography>
                   </CardContent>
                 </Card>
-              </Link>
+              </NavLink>
             </Grid>
           ))}
         </Grid>

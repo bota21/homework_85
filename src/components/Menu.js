@@ -2,20 +2,27 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import { push } from "connected-react-router";
+import { NavLink } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  menuLink: {
+    textDecoration: "none",
+    color: "#000",
+    fontSize: 16,
+    margin: "10px 10px",
+  },
+});
 
 export default function AppBarMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const getHistory = () => {
-    push("/track_history");
     setAnchorEl(null);
   };
 
@@ -35,7 +42,9 @@ export default function AppBarMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}>
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={getHistory}>Track history</MenuItem>
+        <NavLink to="/track_history" className={classes.menuLink}>
+          Track history
+        </NavLink>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
     </div>
