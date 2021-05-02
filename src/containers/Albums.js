@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAlbums } from "../store/actions/albumAction";
 import Album from "../components/Album";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -23,10 +24,14 @@ export default function Albums(props) {
   const dispatch = useDispatch();
   const albums = useSelector((state) => state.albums.albums);
   const id = props.match.params.artistId;
-
+  
   useEffect(() => {
     dispatch(fetchAlbums(id));
   }, [dispatch, id]);
+
+  const goBack = () => {
+    props.history.goBack();
+  };
 
   return (
     <>
@@ -51,6 +56,9 @@ export default function Albums(props) {
         <Grid container spacing={4}>
           <Album albums={albums} />
         </Grid>
+        <Button color="primary" variant="contained" onClick={goBack}>
+          Back
+        </Button>
       </Container>
     </>
   );

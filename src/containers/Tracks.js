@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { requestTracks } from "../store/actions/trackAction";
 import Track from "../components/Track";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -27,6 +28,10 @@ export default function Tracks(props) {
   useEffect(() => {
     dispatch(requestTracks(id));
   }, [dispatch, id]);
+
+  const goBack = () => {
+    props.history.goBack();
+  };
 
   return (
     <>
@@ -53,6 +58,11 @@ export default function Tracks(props) {
         <Grid container spacing={4}>
           <Track tracks={tracks} />
         </Grid>
+      </Container>
+      <Container className={classes.cardGrid} maxWidth="md">
+        <Button color="primary" variant="contained" onClick={goBack}>
+          Back
+        </Button>
       </Container>
     </>
   );

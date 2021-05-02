@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import Artist from "../components/Artist";
 import { useDispatch, useSelector } from "react-redux";
 import { requestArtists } from "../store/actions/artistAction";
+import Spinner from "../components/UI/Spinner/Spinner";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -22,6 +23,7 @@ export default function Artists(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists.artists);
+  const loading = useSelector((state) => state.artists.loading);
 
   useEffect(() => {
     dispatch(requestArtists());
@@ -39,6 +41,7 @@ export default function Artists(props) {
             gutterBottom>
             Artists
           </Typography>
+          {loading ? <Spinner /> : null}
           <Typography
             variant="h5"
             align="center"

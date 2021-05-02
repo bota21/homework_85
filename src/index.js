@@ -15,6 +15,8 @@ import {
 import { createBrowserHistory } from "history";
 import albumReducer from "./store/reducers/albumReducer";
 import trackReducer from "./store/reducers/trackReducer";
+import userReducer from "./store/reducers/userReducer";
+import axios from "./axios/axiosURL";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -24,7 +26,14 @@ const rootReducer = combineReducers({
   artists: artistReducer,
   albums: albumReducer,
   tracks: trackReducer,
-  router: connectRouter(history),
+  user: userReducer,
+  router: connectRouter(history), 
+});
+
+axios.interceptors.request.use((req) => {
+  const users = store.getState().user;
+  req.headers["Authentication"] = users.user && users.user.token;
+  return req;
 });
 
 const middleware = [thunk, routerMiddleware(history)];

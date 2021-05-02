@@ -4,6 +4,7 @@ import Artists from "./Artists";
 import Layout from "../components/Layout";
 import Albums from "./Albums";
 import Tracks from "./Tracks";
+import Register from '../components/Form/Register';
 
 const Main = () => {
   return (
@@ -13,6 +14,7 @@ const Main = () => {
           <Route exact path="/" component={Artists} />
           <Route exact path="/artist/:artistId" component={Albums} />
           <Route exact path="/album/:albumId" component={Tracks} />
+          <Route exact path='/register' component={Register}/>
         </Switch>
       </Layout>
     </div>

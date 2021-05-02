@@ -10,6 +10,15 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  toolbarLink: {
+    cursor: "pointer",
+    marginRight: 20,
+    fontSize: 16,
+  },
 }));
 
 const Layout = (props) => {
@@ -19,19 +28,30 @@ const Layout = (props) => {
     <>
       <CssBaseline />
       <AppBar position="static">
-        <Toolbar>
-          <AudiotrackIcon className={classes.icon} />
+        <Toolbar className={classes.toolbar}>
           <Link variant="h6" color="inherit" href="/">
+            <AudiotrackIcon className={classes.icon} />
             Music
           </Link>
+          <div>
+            <Link
+              variant="h6"
+              color="inherit"
+              href="/register"
+              className={classes.toolbarLink}>
+              Sign up
+            </Link>
+            <Link
+              variant="h6"
+              color="inherit"
+              href="/login"
+              className={classes.toolbarLink}>
+              Sign in
+            </Link>
+          </div>
         </Toolbar>
       </AppBar>
       <main>{props.children}</main>
-      {/* <Container className={classes.cardGrid} maxWidth="md"> */}
-      {/* <Grid container spacing={4}> */}
-
-      {/* </Grid>      */}
-      {/* </Container> */}
     </>
   );
 };
