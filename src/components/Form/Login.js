@@ -1,12 +1,23 @@
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import FormElement from "../UI/FormElement";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUsers } from "../../store/actions/userAction";
+import { loginUsers } from "../../store/actions/userAction";
+import { Alert } from "@material-ui/lab";
 import UserForm from "./UserForm";
 
-export default function Register() {
+const useStyles = makeStyles((theme) => ({
+  alert: {
+    marginTop: theme.spacing(3),
+    marginBottom: 10,
+    width: "100%",
+  },
+}));
+
+export default function Login() {
+  const classes = useStyles();
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.user.registerError);
+  const error = useSelector((state) => state.user.loginError);
 
   const [state, setState] = useState({
     username: "",
@@ -20,32 +31,28 @@ export default function Register() {
     });
   };
 
-  const getFieldError = (fieldName) => {
-    try {
-      return error[fieldName].message;
-    } catch (e) {
-      return undefined;
-    }
-  };
-
-  const registerUser = (e) => {
+  const loginUser = (e) => {
     try {
       e.preventDefault();
-      dispatch(registerUsers({ ...state }));
+      dispatch(loginUsers({ ...state }));
     } catch (e) {
       console.log(e);
     }
   };
 
   return (
-    <UserForm sign="Sign Up" onSubmit={registerUser} linkText="have an">
+    <UserForm sign="Sign In" onSubmit={loginUser} linkText="haven't">
+      {error ? (
+        <Alert severity="error" className={classes.alert}>
+          {error}
+        </Alert>
+      ) : null}
       <FormElement
         name="username"
         label="Username"
         id="username"
         onChange={changeValueHandler}
         value={state.username}
-        error={getFieldError("username")}
       />
       <FormElement
         name="password"
@@ -53,7 +60,6 @@ export default function Register() {
         onChange={changeValueHandler}
         value={state.password}
         type="password"
-        error={getFieldError("password")}
       />
     </UserForm>
   );

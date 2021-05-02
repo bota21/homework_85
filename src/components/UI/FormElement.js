@@ -29,7 +29,7 @@ const FormElement = (props) => {
 FormElement.propTypes = {
   reqired: PropTypes.bool, 
   type: PropTypes.string,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

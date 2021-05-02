@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Main from "./containers/Main";
+import App from "./containers/App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
@@ -45,7 +45,7 @@ const store = createStore(rootReducer, enhancers);
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Main />
+      <App />
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")

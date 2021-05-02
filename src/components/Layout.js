@@ -5,6 +5,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import AppBarMenu from "./Menu";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -23,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Layout = (props) => {
   const classes = useStyles();
+  const user = useSelector(state => state.user.user);
+  // console.log(user);
 
   return (
     <>
@@ -34,7 +38,8 @@ const Layout = (props) => {
             Music
           </Link>
           <div>
-            <Link
+{user ? <AppBarMenu user={user.username}/> : <>
+  <Link
               variant="h6"
               color="inherit"
               href="/register"
@@ -48,6 +53,8 @@ const Layout = (props) => {
               className={classes.toolbarLink}>
               Sign in
             </Link>
+            </>
+}
           </div>
         </Toolbar>
       </AppBar>
