@@ -33,7 +33,7 @@ export default function Tracks(props) {
   if (!user) {
     props.history.push("/login");
   }
-
+  
   const goBack = () => {
     props.history.goBack();
   };

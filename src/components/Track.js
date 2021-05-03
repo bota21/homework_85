@@ -3,6 +3,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
+import ModalWindow from "./UI/ModalWindow";
+import YoutubeModal from "./YoutubeModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer'
   },
   paper: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: "grid",
+    gridTemplateColumns: "30px 80% 100px 100px",
     padding: "5px 20px",
   },
   cardTrack: {
@@ -45,6 +47,10 @@ export default function Track({ tracks, onClick }) {
                 <Typography className={classes.cardText}>
                   {track.long}
                 </Typography>
+                {track && track.youtube && <ModalWindow>
+                 <YoutubeModal video={track.youtube}/>
+               </ModalWindow>
+                }               
               </Paper>
             </Grid>
           ))}
