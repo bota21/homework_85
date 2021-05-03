@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAlbums } from "../store/actions/albumAction";
 import Album from "../components/Album";
 import { Button } from "@material-ui/core";
+import Spinner from "../components/UI/Spinner/Spinner";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -23,9 +24,10 @@ export default function Albums(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const albums = useSelector((state) => state.albums.albums);
+  const loading = useSelector((state) => state.albums.loading);
   const id = props.match.params.artistId;
   const user = useSelector(state => state.user.user);
-  
+
   useEffect(() => {
     dispatch(fetchAlbums(id));
   }, [dispatch, id]);
@@ -39,6 +41,7 @@ export default function Albums(props) {
   return (
     <>
       <div className={classes.heroContent}>
+        {loading ? <Spinner/> : null}
         <Container maxWidth="md">
           <Typography
             component="h1"

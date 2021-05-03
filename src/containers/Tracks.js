@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTrackHistory, requestTracks } from "../store/actions/trackAction";
 import Track from "../components/Track";
 import { Button } from "@material-ui/core";
+import Spinner from "../components/UI/Spinner/Spinner";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -23,6 +24,7 @@ export default function Tracks(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const tracks = useSelector((state) => state.tracks.tracks);
+  const loading = useSelector((state) => state.tracks.loading);
   const user = useSelector((state) => state.user.user);
   const id = props.match.params.albumId;
 
@@ -44,6 +46,7 @@ export default function Tracks(props) {
   return (
     <>
       <div className={classes.heroContent}>
+        {loading ? <Spinner/> : null}
         <Container maxWidth="md">
           <Typography
             component="h1"

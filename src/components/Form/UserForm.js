@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserForm = props => {
+const UserForm = (props) => {
   const classes = useStyles();
 
   return (
@@ -59,7 +59,7 @@ const UserForm = props => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link href={props.link} variant="body2">
                 Already {props.linkText} account? {props.signTo}
               </Link>
             </Grid>

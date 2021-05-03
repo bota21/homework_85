@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   return (
-    <UserForm sign="Sign In" signTo='Sing Up' onSubmit={loginUser} linkText="haven't an">
+    <UserForm sign="Sign In" signTo='Sing Up' onSubmit={loginUser} link='/register' linkText="haven't an">
       {error ? (
         <Alert severity="error" className={classes.alert}>
           {error}

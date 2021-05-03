@@ -2,13 +2,27 @@ import "./Spinner.css";
 
 const Spinner = () => {
   return (
-    <div className="cssload-container">
-		<div className="cssload-sphere cssload-s-gold"></div>
-		<div className="cssload-sphere cssload-s-5"></div>
-		<div className="cssload-sphere cssload-s-4"></div>
-		<div className="cssload-sphere cssload-s-3"></div>
-		<div className="cssload-sphere cssload-s-2"></div>
-		<div className="cssload-sphere cssload-s-1"></div>
+	  <div className='background'>
+	<div className="cssload-loader">
+	<div className="cssload-square cssload-square--main">
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+			<div className="cssload-square cssload-square--mini"></div>
+	</div>
+</div>
 </div>
   );
 };
