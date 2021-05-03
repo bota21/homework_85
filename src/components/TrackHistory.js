@@ -29,7 +29,7 @@ const TrackHistories = ({ trackHistory }) => {
     <>
       {trackHistory.map((item) => {
         return (
-          <Grid item xs={8}>
+          <Grid item xs={8} key={item._id}>
             <Paper className={classes.paper}>
               {item &&
                 item.track &&

@@ -60,7 +60,7 @@ const UserForm = props => {
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
-                Already {props.linkText} account? {props.sign}
+                Already {props.linkText} account? {props.signTo}
               </Link>
             </Grid>
           </Grid>

@@ -13,15 +13,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TrackHistories = () => {
+const TrackHistories = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const trackHistory = useSelector(state => state.tracks.trackHistory);
+  const user = useSelector(state => state.user.user);
 
   useEffect(() => {
 dispatch(showHistory())
   }, [dispatch])
 
+  if(!user) {props.history.push('/login')};
+  
   return (
     <div className={classes.root}>
         <Typography

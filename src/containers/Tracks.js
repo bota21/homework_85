@@ -23,17 +23,22 @@ export default function Tracks(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const tracks = useSelector((state) => state.tracks.tracks);
+  const user = useSelector((state) => state.user.user);
   const id = props.match.params.albumId;
-  
+
   useEffect(() => {
     dispatch(requestTracks(id));
   }, [dispatch, id]);
+
+  if (!user) {
+    props.history.push("/login");
+  }
 
   const goBack = () => {
     props.history.goBack();
   };
   const postTrackHistory = (id) => {
-    dispatch(addTrackHistory({track: id}))
+    dispatch(addTrackHistory({ track: id }));
   };
 
   return (
@@ -59,7 +64,7 @@ export default function Tracks(props) {
       </div>
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          <Track tracks={tracks} onClick={postTrackHistory}/>
+          <Track tracks={tracks} onClick={postTrackHistory} />
         </Grid>
       </Container>
       <Container className={classes.cardGrid} maxWidth="md">

@@ -38,7 +38,7 @@ export default function Register() {
   };
 
   return (
-    <UserForm sign="Sign Up" onSubmit={registerUser} linkText="have an">
+    <UserForm sign="Sign Up" signTo='Sign In' onSubmit={registerUser} linkText="have an">
       <FormElement
         name="username"
         label="Username"

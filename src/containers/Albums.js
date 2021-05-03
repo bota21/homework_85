@@ -24,6 +24,7 @@ export default function Albums(props) {
   const dispatch = useDispatch();
   const albums = useSelector((state) => state.albums.albums);
   const id = props.match.params.artistId;
+  const user = useSelector(state => state.user.user);
   
   useEffect(() => {
     dispatch(fetchAlbums(id));
@@ -32,6 +33,8 @@ export default function Albums(props) {
   const goBack = () => {
     props.history.goBack();
   };
+
+  if(!user) {props.history.push('/login')};
 
   return (
     <>
