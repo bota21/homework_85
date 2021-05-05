@@ -25,16 +25,11 @@ export default function Tracks(props) {
   const dispatch = useDispatch();
   const tracks = useSelector((state) => state.tracks.tracks);
   const loading = useSelector((state) => state.tracks.loading);
-  const user = useSelector((state) => state.user.user);
   const id = props.match.params.albumId;
 
   useEffect(() => {
     dispatch(requestTracks(id));
   }, [dispatch, id]);
-
-  if (!user) {
-    props.history.push("/login");
-  }
   
   const goBack = () => {
     props.history.goBack();

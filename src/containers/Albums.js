@@ -26,7 +26,6 @@ export default function Albums(props) {
   const albums = useSelector((state) => state.albums.albums);
   const loading = useSelector((state) => state.albums.loading);
   const id = props.match.params.artistId;
-  const user = useSelector(state => state.user.user);
 
   useEffect(() => {
     dispatch(fetchAlbums(id));
@@ -36,12 +35,10 @@ export default function Albums(props) {
     props.history.goBack();
   };
 
-  if(!user) {props.history.push('/login')};
-
   return (
     <>
       <div className={classes.heroContent}>
-        {loading ? <Spinner/> : null}
+        {loading ? <Spinner /> : null}
         <Container maxWidth="md">
           <Typography
             component="h1"

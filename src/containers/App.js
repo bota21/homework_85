@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Artists from "./Artists";
 import Layout from "../components/Layout";
 import Albums from "./Albums";
@@ -8,19 +9,68 @@ import Register from "../components/Form/Register";
 import Login from "../components/Form/Login";
 import Main from "../components/Main";
 import TrackHistories from "./TrackHistories";
+import { useSelector } from "react-redux";
+
+const ProtectedRoute = ({ isAllowed, redirectTo, ...props }) => {
+  return isAllowed ? <Route {...props} /> : <Redirect to={redirectTo} />;
+};
 
 const App = () => {
+  const user = useSelector((state) => state.user.user);
+
   return (
     <div className="Main">
       <Layout>
         <Switch>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/artists" component={Artists} />
-          <Route exact path="/artist/:artistId" component={Albums} />
-          <Route exact path="/album/:albumId" component={Tracks} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/track_history" component={TrackHistories} />
+          <ProtectedRoute
+            isAllowed={!user}
+            exact
+            path="/"
+            redirectTo="/artists"
+            component={Main}
+          />
+          <ProtectedRoute
+            isAllowed={user !== null}
+            redirectTo="/login"
+            exact
+            path="/artists"
+            component={Artists}
+          />
+          <ProtectedRoute
+            isAllowed={user !== null}
+            redirectTo="/login"
+            exact
+            path="/artist/:artistId"
+            component={Albums}
+          />
+          <ProtectedRoute
+            isAllowed={user !== null}
+            redirectTo="/login"
+            exact
+            path="/album/:albumId"
+            component={Tracks}
+          />
+          <ProtectedRoute
+            isAllowed={!user}
+            redirectTo="/artists"
+            exact
+            path="/register"
+            component={Register}
+          />
+          <ProtectedRoute
+            isAllowed={!user}
+            redirectTo="/artists"
+            exact
+            path="/login"
+            component={Login}
+          />
+          <ProtectedRoute
+            isAllowed={user !== null}
+            redirectTo="/login"
+            exact
+            path="/track_history"
+            component={TrackHistories}
+          />
         </Switch>
       </Layout>
     </div>
