@@ -50,6 +50,14 @@ export const loginUsers = (users) => {
   };
 };
 
-export const logoutUser = () => { 
-  return {type: LOGOUT_USER};
+export const logoutUser = () => {
+  return async (dispatch) => {
+    try {
+      await axios.delete("/users/sessions");
+      dispatch({ type: LOGOUT_USER });
+      dispatch(push("/"));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 };
