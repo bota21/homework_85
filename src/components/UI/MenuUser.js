@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AppBarMenu(props) {
+export default function MenuUser(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const classes = useStyles();
 
@@ -24,6 +24,7 @@ export default function AppBarMenu(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
+    props.logout();
   };
 
   return (

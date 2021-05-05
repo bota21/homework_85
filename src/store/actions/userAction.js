@@ -1,6 +1,7 @@
 import {
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
 } from "../actionTypes";
@@ -47,4 +48,8 @@ export const loginUsers = (users) => {
       }
     }
   };
+};
+
+export const logoutUser = () => { 
+  return {type: LOGOUT_USER};
 };

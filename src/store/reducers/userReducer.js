@@ -1,6 +1,7 @@
 import {
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
 } from "../actionTypes";
@@ -21,6 +22,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, user: action.users, loginError: null };
     case LOGIN_USER_ERROR:
       return { ...state, loginError: action.error };
+    case LOGOUT_USER:
+      return { ...state, user: null };
     default:
       return state;
   }
