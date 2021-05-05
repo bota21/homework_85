@@ -25,7 +25,7 @@ export default function Artists(props) {
   const artists = useSelector((state) => state.artists.artists);
   const loading = useSelector((state) => state.artists.loading);
   const user = useSelector((state) => state.user.user);
-
+  
   if(!user) {props.history.push('/login')};
 
   useEffect(() => {
