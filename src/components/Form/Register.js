@@ -3,10 +3,12 @@ import FormElement from "../UI/FormElement";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUsers } from "../../store/actions/userAction";
 import UserForm from "./UserForm";
+import { Redirect } from "react-router-dom";
 
 export default function Register() {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.user.registerError);
+  const user = useSelector((state) => state.user.user);
 
   const [state, setState] = useState({
     username: "",
@@ -38,7 +40,13 @@ export default function Register() {
   };
 
   return (
-    <UserForm sign="Sign Up" signTo='Sign In' onSubmit={registerUser} link='/login' linkText="have an">
+    <UserForm
+      sign="Sign Up"
+      signTo="Sign In"
+      onSubmit={registerUser}
+      link="/login"
+      linkText="have an">
+      {user !== null ? <Redirect to="/artists" /> : null}
       <FormElement
         name="username"
         label="Username"

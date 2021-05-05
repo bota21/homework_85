@@ -3,6 +3,8 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -13,10 +15,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Main = () => {
   const classes = useStyles();
+  const user = useSelector((state) => state.user.user);
+
   return (
     <>
+    {(user !== null) ? <Redirect to='/artists'/> : null}
       <main>
-         
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
@@ -39,10 +43,15 @@ const Main = () => {
               align="center"
               color="textSecondary"
               paragraph>
-             Please 
-             <span> </span>
-             <Button variant='outlined' disabled>Sign up</Button> <span> </span> and <span> </span>
-             <Button variant='outlined' disabled>Sign in</Button>               
+              Please
+              <span> </span>
+              <Button variant="outlined" disabled>
+                Sign up
+              </Button>{" "}
+              <span> </span> and <span> </span>
+              <Button variant="outlined" disabled>
+                Sign in
+              </Button>
             </Typography>
           </Container>
         </div>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUsers } from "../../store/actions/userAction";
 import { Alert } from "@material-ui/lab";
 import UserForm from "./UserForm";
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   alert: {
@@ -18,6 +19,7 @@ export default function Login() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const error = useSelector((state) => state.user.loginError);
+  const user = useSelector((state) => state.user.user);
 
   const [state, setState] = useState({
     username: "",
@@ -42,6 +44,7 @@ export default function Login() {
 
   return (
     <UserForm sign="Sign In" signTo='Sing Up' onSubmit={loginUser} link='/register' linkText="haven't an">
+      {(user !== null) ? <Redirect to='/artists'/> : null}
       {error ? (
         <Alert severity="error" className={classes.alert}>
           {error}
