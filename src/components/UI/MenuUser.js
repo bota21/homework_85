@@ -1,22 +1,11 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import { NavLink } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
-  menuLink: {
-    textDecoration: "none",
-    color: "#000",
-    fontSize: 16,
-    margin: "10px 10px",
-  },
-});
-
-export default function MenuUser(props) {
+const MenuUser = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const classes = useStyles();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,9 +13,16 @@ export default function MenuUser(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
-    props.logout();
   };
-
+  const getHistory = () => {
+    history.push('/track_history');
+    handleClose();
+  };
+  const logout = () => {
+    props.logout();
+    handleClose();
+  }
+  const history = useHistory()
   return (
     <div>
       <Button
@@ -43,11 +39,13 @@ export default function MenuUser(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}>
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <NavLink to="/track_history" className={classes.menuLink}>
+        <MenuItem onClick={getHistory} >
           Track history
-        </NavLink>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
     </div>
   );
 }
+
+export default MenuUser;

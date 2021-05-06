@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     marginRight: 20,
     fontSize: 16,
-  },
+  },  
+  appbar: {
+    background: "#64b5f6"
+  }
 }));
 
 const Layout = (props) => {
@@ -36,7 +39,7 @@ const Layout = (props) => {
   return (
     <>
       <CssBaseline />
-      <AppBar position="static">
+      <AppBar position="static"className={classes.appbar}>
         <Toolbar className={classes.toolbar}>
           <Link variant="h6" color="inherit" href="/">
             <AudiotrackIcon className={classes.icon} />
