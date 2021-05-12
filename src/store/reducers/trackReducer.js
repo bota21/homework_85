@@ -4,7 +4,11 @@ import {
   FETCH_TRACK_HISTORY_SUCCESS,
   FETCH_TRACK_SUCCESS,
   POST_TRACK_HISTORY_ERROR,
-  FETCH_TRACK_HISTORY_ERROR
+  FETCH_TRACK_HISTORY_ERROR,
+  STOP_LOADING,
+  POST_TRACK,
+  POST_TRACK_SUCCESS,
+  POST_TRACK_ERROR,
 } from "../actionTypes";
 
 const initialState = {
@@ -29,6 +33,14 @@ const reducer = (state = initialState, action) => {
       return { ...state, trackHistory: action.history };
     case FETCH_TRACK_HISTORY_ERROR:
       return { ...state, TRError: action.error };
+    case STOP_LOADING:
+      return { ...state, loading: false };
+    case POST_TRACK:
+      return { ...state, loading: true };
+    case POST_TRACK_SUCCESS:
+      return { ...state, loading: false };
+    case POST_TRACK_ERROR:
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }

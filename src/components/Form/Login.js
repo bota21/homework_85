@@ -4,7 +4,7 @@ import FormElement from "../UI/FormElement";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUsers } from "../../store/actions/userAction";
 import { Alert } from "@material-ui/lab";
-import UserForm from "./UserForm";
+import UserForm from "../UserForm";
 
 const useStyles = makeStyles((theme) => ({
   alert: {

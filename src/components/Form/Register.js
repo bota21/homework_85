@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormElement from "../UI/FormElement";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUsers } from "../../store/actions/userAction";
-import UserForm from "./UserForm";
+import UserForm from "../UserForm";
 
 export default function Register() {
   const dispatch = useDispatch();

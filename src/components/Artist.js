@@ -41,7 +41,7 @@ export default function Artist({ artists }) {
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {artists.map((artist) => (
-            <Grid item key={artist._id} xs={12} sm={6} md={4}>
+           artist && artist.published && <Grid item key={artist._id} xs={12} sm={6} md={4}>
               <NavLink
                 to={"/artist/" + artist._id}
                 color="inherit"

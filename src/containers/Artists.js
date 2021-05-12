@@ -7,6 +7,7 @@ import Artist from "../components/Artist";
 import { useDispatch, useSelector } from "react-redux";
 import { requestArtists } from "../store/actions/artistAction";
 import Spinner from "../components/UI/Spinner/Spinner";
+import MenuButtons from "../components/UI/MenuButtons";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -31,7 +32,8 @@ export default function Artists(props) {
 
   return (
     <>
-      <div className={classes.heroContent}>
+     <MenuButtons/>
+      <div className={classes.heroContent}>       
         <Container maxWidth="md">
           <Typography
             component="h1"

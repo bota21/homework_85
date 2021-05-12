@@ -1,5 +1,5 @@
 import axios from "../../axios/axiosURL";
-
+import { push } from "connected-react-router";
 import {
   FETCH_REQUEST,
   FETCH_TRACK_SUCCESS,
@@ -7,6 +7,9 @@ import {
   POST_TRACK_HISTORY_ERROR,
   FETCH_TRACK_HISTORY_ERROR,
   FETCH_TRACK_HISTORY_SUCCESS,
+  POST_TRACK,
+  POST_TRACK_SUCCESS,
+  POST_TRACK_ERROR,
 } from "../actionTypes";
 
 const fetchRequest = () => {
@@ -26,6 +29,15 @@ const fetchTrackHistorySuccess = (history) => {
 };
 const fetchTrackHistoryError = (error) => {
   return { type: FETCH_TRACK_HISTORY_ERROR, error };
+};
+const postTrack = () => {
+  return { type: POST_TRACK };
+};
+const postTrackSuccess = () => {
+  return { type: POST_TRACK_SUCCESS };
+};
+const postTrackError = (error) => {
+  return { type: POST_TRACK_ERROR, error };
 };
 
 export const requestTracks = (id) => {
@@ -57,6 +69,20 @@ export const showHistory = () => {
       dispatch(fetchTrackHistorySuccess(response.data));
     } catch (e) {
       dispatch(fetchTrackHistoryError(e));
+    }
+  };
+};
+
+export const createTrack = (track) => {
+  return async (dispatch) => {
+    try {
+      dispatch(postTrack());
+      await axios.post("/tracks", track);
+      dispatch(postTrackSuccess());
+      dispatch(push("/artists"));
+    } catch (e) {
+      const message = "Track not created";
+      dispatch(postTrackError(message));
     }
   };
 };

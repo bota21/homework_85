@@ -10,6 +10,9 @@ import Login from "../components/Form/Login";
 import Main from "../components/Main";
 import TrackHistories from "./TrackHistories";
 import { useSelector } from "react-redux";
+import AddArtist from '../components/Form/AddArtist';
+import AddAlbum from "../components/Form/AddAlbum";
+import AddTrack from "../components/Form/AddTrack";
 
 const ProtectedRoute = ({ isAllowed, redirectTo, ...props }) => {
   return isAllowed ? <Route {...props} /> : <Redirect to={redirectTo} />;
@@ -49,6 +52,27 @@ const App = () => {
             exact
             path="/album/:albumId"
             component={Tracks}
+          />
+          <ProtectedRoute
+            isAllowed={user !== null}
+            redirectTo="/login"
+            exact
+            path="/add_artist"
+            component={AddArtist}
+          />
+          <ProtectedRoute
+            isAllowed={user !== null}
+            redirectTo="/login"
+            exact
+            path="/add_track"
+            component={AddTrack}
+          />
+          <ProtectedRoute
+            isAllowed={user !== null}
+            redirectTo="/login"
+            exact
+            path="/add_album"
+            component={AddAlbum}
           />
           <ProtectedRoute
             isAllowed={!user}

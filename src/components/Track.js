@@ -36,7 +36,7 @@ export default function Track({ tracks, onClick }) {
       <div className={classes.root}>
         <Grid container spacing={3}>
           {tracks.map((track) => (
-            <Grid item xs={12} key={track._id} onClick={() => onClick(track._id)}>
+          track && track.published && <Grid item xs={12} key={track._id} onClick={() => onClick(track._id)}>
               <Paper className={classes.paper}>
                 <Typography className={classes.cardText}>
                   {track.num}

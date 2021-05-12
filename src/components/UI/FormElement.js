@@ -20,6 +20,8 @@ const FormElement = (props) => {
           value={props.value}
           onChange={props.onChange}
           autoComplete={props.name}
+          multiline
+          rows={props.rows}
         />
       </Grid>
     </>

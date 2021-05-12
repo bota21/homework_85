@@ -42,7 +42,7 @@ export default function Album({ albums }) {
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {albums.map((album) => (
-            <Grid item key={album._id} xs={12} sm={6} md={4}>
+           album && album.published && <Grid item key={album._id} xs={12} sm={6} md={4}>
               <NavLink to={"/album/" + album._id} className={classes.albumLink}>
                 <Card className={classes.card}>
                   <CardMedia
