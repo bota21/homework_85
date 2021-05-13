@@ -161,9 +161,9 @@ export const putTrack = (id) => {
       const response = await axios.put("/tracks/" + id, { "published": true });
       const changedTrack = response.data;
       const tracks = [...getState().tracks.tracks];
-      const index = tracks.findIndex((track) => track.id === id);
+      const index = tracks.findIndex((track) => track._id === id);
       tracks[index] = changedTrack;
-      dispatch(putAdminTrackSuccess(changedTrack));
+      dispatch(putAdminTrackSuccess(tracks));
     } catch (e) {
       dispatch(fetchAdminTrackError(e));
     }

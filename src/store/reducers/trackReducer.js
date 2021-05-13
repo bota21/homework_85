@@ -58,7 +58,11 @@ const reducer = (state = initialState, action) => {
     case FETCH_ADMIN_TRACK:
       return { ...state, loading: true };
     case PUT_ADMIN_TRACK_SUCCESS:
-      return { ...state, tracks: action.tracks, loading: false };
+      return {
+        ...state,
+        tracks: action.tracks,
+        loading: false,
+      };
     case DELETE_ADMIN_TRACK_SUCCESS:
       return { ...state, tracks: action.tracks, loading: false };
     case FETCH_ADMIN_TRACK_ERROR:

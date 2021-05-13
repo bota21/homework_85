@@ -115,9 +115,9 @@ export const putArtist = (id) => {
       const response = await axios.put("/artists/" + id, { "published": true });
       const changedArtist = response.data;
       const artists = [...getState().artists.artists];
-      const index = artists.findIndex((artist) => artist.id === id);
+      const index = artists.findIndex((artist) => artist._id === id);
       artists[index] = changedArtist;
-      dispatch(putAdminArtistSuccess(changedArtist));
+      dispatch(putAdminArtistSuccess(artists));
     } catch (e) {
       dispatch(fetchAdminArtistError(e));
     }

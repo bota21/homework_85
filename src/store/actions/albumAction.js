@@ -133,9 +133,9 @@ export const putAlbum = (id) => {
       const response = await axios.put("/albums/" + id, { "published": true });
       const changedAlbum = response.data;
       const albums = [...getState().albums.albums];
-      const index = albums.findIndex((album) => album.id === id);
+      const index = albums.findIndex((album) => album._id === id);
       albums[index] = changedAlbum;
-      dispatch(putAdminAlbumSuccess(changedAlbum));
+      dispatch(putAdminAlbumSuccess(albums));
     } catch (e) {
       dispatch(fetchAdminAlbumError(e));
     }
