@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import AddArtist from '../components/Form/AddArtist';
 import AddAlbum from "../components/Form/AddAlbum";
 import AddTrack from "../components/Form/AddTrack";
+import Profile from './Profile';
 
 const ProtectedRoute = ({ isAllowed, redirectTo, ...props }) => {
   return isAllowed ? <Route {...props} /> : <Redirect to={redirectTo} />;
@@ -94,6 +95,13 @@ const App = () => {
             exact
             path="/track_history"
             component={TrackHistories}
+          />
+          <ProtectedRoute
+            isAllowed={user !== null}
+            redirectTo="/login"
+            exact
+            path="/profile"
+            component={Profile}
           />
         </Switch>
       </Layout>

@@ -10,6 +10,13 @@ import {
   POST_TRACK,
   POST_TRACK_SUCCESS,
   POST_TRACK_ERROR,
+  FETCH_USER_TRACK,
+  FETCH_USER_TRACK_ERROR,
+  FETCH_USER_TRACK_SUCCESS,
+  FETCH_ADMIN_TRACK,
+  PUT_ADMIN_TRACK_SUCCESS,
+  DELETE_ADMIN_TRACK_SUCCESS,
+  FETCH_ADMIN_TRACK_ERROR,
 } from "../actionTypes";
 
 const fetchRequest = () => {
@@ -39,6 +46,27 @@ const postTrackSuccess = () => {
 const postTrackError = (error) => {
   return { type: POST_TRACK_ERROR, error };
 };
+const fetchUserRequest = () => {
+  return { type: FETCH_USER_TRACK };
+};
+const fetchUserTrackSuccess = (tracks) => {
+  return { type: FETCH_USER_TRACK_SUCCESS, tracks };
+};
+const fetchUserTrackError = (error) => {
+  return { type: FETCH_USER_TRACK_ERROR, error };
+};
+const fetchAdminRequest = () => {
+  return { type: FETCH_ADMIN_TRACK };
+};
+const putAdminTrackSuccess = () => {
+  return { type: PUT_ADMIN_TRACK_SUCCESS };
+};
+const deleteAdminTrackSuccess = () => {
+  return { type: DELETE_ADMIN_TRACK_SUCCESS };
+};
+const fetchAdminTrackError = (error) => {
+  return { type: FETCH_ADMIN_TRACK_ERROR, error };
+};
 
 export const requestTracks = (id) => {
   return async (dispatch) => {
@@ -48,6 +76,30 @@ export const requestTracks = (id) => {
       dispatch(fetchTrackSuccess(response.data));
     } catch (e) {
       dispatch(fetchTrackError(e));
+    }
+  };
+};
+
+export const requestAllTracks = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchRequest());
+      const response = await axios.get("/tracks");
+      dispatch(fetchTrackSuccess(response.data));
+    } catch (e) {
+      dispatch(fetchTrackError(e));
+    }
+  };
+};
+
+export const queryTracks = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchUserRequest());
+      const response = await axios.get("/tracks?user=" + id);
+      dispatch(fetchUserTrackSuccess(response.data));
+    } catch (e) {
+      dispatch(fetchUserTrackError(e));
     }
   };
 };
@@ -83,6 +135,30 @@ export const createTrack = (track) => {
     } catch (e) {
       const message = "Track not created";
       dispatch(postTrackError(message));
+    }
+  };
+};
+
+export const deleteTrack = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchAdminRequest());
+      await axios.delete("/tracks/" + id);
+      dispatch(deleteAdminTrackSuccess());
+    } catch (e) {
+      dispatch(fetchAdminTrackError(e));
+    }
+  };
+};
+
+export const putTrack = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchAdminRequest());
+      await axios.post("/artists/" + id, {"published": true});
+      dispatch(putAdminTrackSuccess());
+    } catch (e) {
+      dispatch(fetchAdminTrackError(e));
     }
   };
 };

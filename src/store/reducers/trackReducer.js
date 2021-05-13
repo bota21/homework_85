@@ -9,6 +9,13 @@ import {
   POST_TRACK,
   POST_TRACK_SUCCESS,
   POST_TRACK_ERROR,
+  FETCH_USER_TRACK,
+  FETCH_USER_TRACK_SUCCESS,
+  FETCH_USER_TRACK_ERROR,
+  FETCH_ADMIN_TRACK,
+  PUT_ADMIN_TRACK_SUCCESS,
+  DELETE_ADMIN_TRACK_SUCCESS,
+  FETCH_ADMIN_TRACK_ERROR,
 } from "../actionTypes";
 
 const initialState = {
@@ -17,6 +24,7 @@ const initialState = {
   error: null,
   trackHistory: [],
   TRError: null,
+  userTracks: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +48,20 @@ const reducer = (state = initialState, action) => {
     case POST_TRACK_SUCCESS:
       return { ...state, loading: false };
     case POST_TRACK_ERROR:
+      return { ...state, loading: false, error: action.error };
+    case FETCH_USER_TRACK:
+      return { ...state, loading: true };
+    case FETCH_USER_TRACK_SUCCESS:
+      return { ...state, loading: false, userTracks: action.tracks };
+    case FETCH_USER_TRACK_ERROR:
+      return { ...state, loading: false, error: action.error };
+    case FETCH_ADMIN_TRACK:
+      return { ...state, loading: true };
+    case PUT_ADMIN_TRACK_SUCCESS:
+      return { ...state, loading: false };
+    case DELETE_ADMIN_TRACK_SUCCESS:
+      return { ...state, loading: false };
+    case FETCH_ADMIN_TRACK_ERROR:
       return { ...state, loading: false, error: action.error };
     default:
       return state;
