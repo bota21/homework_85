@@ -47,11 +47,11 @@ const fetchUserAlbumError = (error) => {
 const fetchAdminRequest = () => {
   return { type: FETCH_ADMIN_ALBUM };
 };
-const putAdminAlbumSuccess = () => {
-  return { type: PUT_ADMIN_ALBUM_SUCCESS };
+const putAdminAlbumSuccess = (albums) => {
+  return { type: PUT_ADMIN_ALBUM_SUCCESS, albums };
 };
-const deleteAdminAlbumSuccess = () => {
-  return { type: DELETE_ADMIN_ALBUM_SUCCESS };
+const deleteAdminAlbumSuccess = (albums) => {
+  return { type: DELETE_ADMIN_ALBUM_SUCCESS, albums };
 };
 const fetchAdminAlbumError = (error) => {
   return { type: FETCH_ADMIN_ALBUM_ERROR, error };
@@ -112,11 +112,14 @@ export const stopLoading = () => {
 };
 
 export const deleteAlbum = (id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(fetchAdminRequest());
       await axios.delete("/albums/" + id);
-      dispatch(deleteAdminAlbumSuccess());
+      const albums = [...getState().albums.albums];
+      const index = albums.findIndex((album) => album.id === id);
+      albums.splice(index, 1);
+      dispatch(deleteAdminAlbumSuccess(albums));
     } catch (e) {
       dispatch(fetchAdminAlbumError(e));
     }
@@ -124,11 +127,15 @@ export const deleteAlbum = (id) => {
 };
 
 export const putAlbum = (id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(fetchAdminRequest());
-      await axios.put("/albums/" + id, {"published": true});
-      dispatch(putAdminAlbumSuccess());
+      const response = await axios.put("/albums/" + id, { "published": true });
+      const changedAlbum = response.data;
+      const albums = [...getState().albums.albums];
+      const index = albums.findIndex((album) => album.id === id);
+      albums[index] = changedAlbum;
+      dispatch(putAdminAlbumSuccess(changedAlbum));
     } catch (e) {
       dispatch(fetchAdminAlbumError(e));
     }

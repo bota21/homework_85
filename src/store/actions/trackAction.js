@@ -58,11 +58,11 @@ const fetchUserTrackError = (error) => {
 const fetchAdminRequest = () => {
   return { type: FETCH_ADMIN_TRACK };
 };
-const putAdminTrackSuccess = () => {
-  return { type: PUT_ADMIN_TRACK_SUCCESS };
+const putAdminTrackSuccess = (tracks) => {
+  return { type: PUT_ADMIN_TRACK_SUCCESS, tracks };
 };
-const deleteAdminTrackSuccess = () => {
-  return { type: DELETE_ADMIN_TRACK_SUCCESS };
+const deleteAdminTrackSuccess = (tracks) => {
+  return { type: DELETE_ADMIN_TRACK_SUCCESS, tracks };
 };
 const fetchAdminTrackError = (error) => {
   return { type: FETCH_ADMIN_TRACK_ERROR, error };
@@ -140,11 +140,14 @@ export const createTrack = (track) => {
 };
 
 export const deleteTrack = (id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(fetchAdminRequest());
       await axios.delete("/tracks/" + id);
-      dispatch(deleteAdminTrackSuccess());
+      const tracks = [...getState().tracks.tracks];
+      const index = tracks.findIndex((track) => track.id === id);
+      tracks.splice(index, 1);
+      dispatch(deleteAdminTrackSuccess(tracks));
     } catch (e) {
       dispatch(fetchAdminTrackError(e));
     }
@@ -152,11 +155,15 @@ export const deleteTrack = (id) => {
 };
 
 export const putTrack = (id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(fetchAdminRequest());
-      await axios.post("/artists/" + id, {"published": true});
-      dispatch(putAdminTrackSuccess());
+      const response = await axios.put("/tracks/" + id, { "published": true });
+      const changedTrack = response.data;
+      const tracks = [...getState().tracks.tracks];
+      const index = tracks.findIndex((track) => track.id === id);
+      tracks[index] = changedTrack;
+      dispatch(putAdminTrackSuccess(changedTrack));
     } catch (e) {
       dispatch(fetchAdminTrackError(e));
     }

@@ -44,9 +44,9 @@ const reducer = (state = initialState, action) => {
     case FETCH_ADMIN_ARTIST:
       return { ...state, loading: true };
     case PUT_ADMIN_ARTIST_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, loading: false, artists: action.artists };
     case DELETE_ADMIN_ARTIST_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, loading: false, artists: action.artists };
     case FETCH_ADMIN_ARTIST_ERROR:
       return { ...state, error: action.error };
     default:

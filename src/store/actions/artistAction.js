@@ -46,11 +46,11 @@ const fetchUserArtistError = (error) => {
 const fetchAdminRequest = () => {
   return { type: FETCH_ADMIN_ARTIST };
 };
-const putAdminArtistSuccess = () => {
-  return { type: PUT_ADMIN_ARTIST_SUCCESS };
+const putAdminArtistSuccess = (artists) => {
+  return { type: PUT_ADMIN_ARTIST_SUCCESS, artists };
 };
-const deleteAdminArtistSuccess = () => {
-  return { type: DELETE_ADMIN_ARTIST_SUCCESS };
+const deleteAdminArtistSuccess = (artists) => {
+  return { type: DELETE_ADMIN_ARTIST_SUCCESS, artists };
 };
 const fetchAdminArtistError = (error) => {
   return { type: FETCH_ADMIN_ARTIST_ERROR, error };
@@ -94,11 +94,14 @@ export const createArtist = (artist) => {
 };
 
 export const deleteArtist = (id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(fetchAdminRequest());
       await axios.delete("/artists/" + id);
-      dispatch(putAdminArtistSuccess());
+      const artists = [...getState().artists.artists];
+      const index = artists.findIndex((artist) => artist.id === id);
+      artists.splice(index, 1);
+      dispatch(deleteAdminArtistSuccess(artists));
     } catch (e) {
       dispatch(fetchAdminArtistError(e));
     }
@@ -106,11 +109,15 @@ export const deleteArtist = (id) => {
 };
 
 export const putArtist = (id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(fetchAdminRequest());
-      await axios.put("/artists/" + id, { published: true });
-      dispatch(deleteAdminArtistSuccess());
+      const response = await axios.put("/artists/" + id, { "published": true });
+      const changedArtist = response.data;
+      const artists = [...getState().artists.artists];
+      const index = artists.findIndex((artist) => artist.id === id);
+      artists[index] = changedArtist;
+      dispatch(putAdminArtistSuccess(changedArtist));
     } catch (e) {
       dispatch(fetchAdminArtistError(e));
     }

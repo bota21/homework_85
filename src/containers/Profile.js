@@ -62,7 +62,7 @@ const Profile = () => {
   const publishTrack = (id) => {
     dispatch(putTrack(id));
   };
-  
+
   useEffect(() => {
     dispatch(queryArtists(user._id));
   }, [dispatch, user._id]);
@@ -74,7 +74,7 @@ const Profile = () => {
   useEffect(() => {
     dispatch(queryTracks(user._id));
   }, [dispatch, user._id]);
-
+  
   return (
     <>
       {user && user.role === "admin" ? (
@@ -100,7 +100,7 @@ const Profile = () => {
         </>
       ) : (
         <>
-          <UserTable array={artistsUser} title="Artists" /> 
+          <UserTable array={artistsUser} title="Artists" />
           <UserTable array={albumsUser} title="Albums" />
           <UserTable array={tracksUser} title="Tracks" />
         </>

@@ -47,9 +47,9 @@ const reducer = (state = initialState, action) => {
     case FETCH_ADMIN_ALBUM:
       return { ...state, loading: true };
     case PUT_ADMIN_ALBUM_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, albums: action.albums, loading: false };
     case DELETE_ADMIN_ALBUM_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, albums: action.albums, loading: false };
     case FETCH_ADMIN_ALBUM_ERROR:
       return { ...state, error: action.error, loading: false };
     default:
